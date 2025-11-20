@@ -1,5 +1,7 @@
 .carousel-wrapper {
   width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
   overflow: hidden;
   padding: 32px 0;
   position: relative;
@@ -10,17 +12,24 @@
   gap: 24px;
   justify-content: flex-start;
   padding: 0 48px;
+  transition: transform 0.3s ease;
 }
 
 .carousel-item {
   flex: 0 0 18%;
   max-width: 18%;
   transform: scale(1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
 }
 
 .carousel-item:hover {
   transform: scale(1.03);
+}
+
+.edge-card {
+  transform: scale(0.92);
+  filter: blur(1px);
+  opacity: 0.8;
 }
 
 .carousel-controls {
@@ -57,16 +66,6 @@
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
-}
-
-
-.carousel-btn:hover {
-  color: #0070f3;
-}
-
-.carousel-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {

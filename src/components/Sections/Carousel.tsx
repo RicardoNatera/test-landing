@@ -24,43 +24,45 @@ export default function Carousel() {
   }, []);
 
   const next = () => {
-    setStartIndex((prev) =>
-      prev + 1 <= articles.length - visibleCount ? prev + 1 : prev
-    );
+    setStartIndex((prev) => (prev + 1) % articles.length);
   };
 
   const prev = () => {
-    setStartIndex((prev) => (prev > 0 ? prev - 1 : 0));
+    setStartIndex((prev) => (prev - 1 + articles.length) % articles.length);
   };
 
-  const visibleArticles = articles.slice(startIndex, startIndex + visibleCount);
+  const visibleArticles =
+    startIndex + visibleCount <= articles.length
+      ? articles.slice(startIndex, startIndex + visibleCount)
+      : [
+          ...articles.slice(startIndex),
+          ...articles.slice(0, (startIndex + visibleCount) % articles.length),
+        ];
 
   if (articles.length === 0) return <p>Loading...</p>;
 
   return (
     <div className="carousel-wrapper">
       <div className="carousel-track">
-        {visibleArticles.map((article, idx) => (
-          <div className="carousel-item" key={idx}>
-            <Card
-              title={article.title}
-              description={article.description}
-              image={article.image}
-            />
-          </div>
-        ))}
+        {visibleArticles.map((article, idx) => {
+          const isEdge = idx === 0 || idx === visibleArticles.length - 1;
+          return (
+            <div
+              className={`carousel-item ${isEdge ? "edge-card" : ""}`}
+              key={idx}
+            >
+              <Card
+                title={article.title}
+                description={article.description}
+                image={article.image}
+              />
+            </div>
+          );
+        })}
       </div>
       <div className="carousel-controls">
-        <button className="carousel-btn" onClick={prev} disabled={startIndex === 0}>
-          ‹
-        </button>
-        <button
-          className="carousel-btn"
-          onClick={next}
-          disabled={startIndex + visibleCount >= articles.length}
-        >
-          ›
-        </button>
+        <button className="carousel-btn" onClick={prev}>‹</button>
+        <button className="carousel-btn" onClick={next}>›</button>
       </div>
     </div>
   );
