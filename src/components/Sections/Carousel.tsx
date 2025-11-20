@@ -56,15 +56,19 @@ export default function Carousel() {
 
   if (articles.length === 0) return <p>Loading...</p>;
 
+  const count = visibleArticles.length;
+  const isSingle = count === 1;
+  const isTwo = count === 2;
+
   return (
-    <div className="carousel-wrapper">
-      <div className="carousel-track">
+    <div className={`carousel-wrapper ${isSingle ? "single" : ""}`}>
+      <div className={`carousel-track ${isSingle ? "single" : ""}`}>
         {visibleArticles.map((article, idx) => {
-          const isEdge = visibleArticles.length > 2 && (idx === 0 || idx === visibleArticles.length - 1);
+          const isEdge = count > 2 && (idx === 0 || idx === count - 1);
 
           return (
             <div
-              className={`carousel-item ${isEdge ? "edge-card" : ""}`}
+              className={`carousel-item ${isEdge ? "edge-card" : ""} ${isSingle ? "single" : ""}`}
               key={idx}
             >
               <Card

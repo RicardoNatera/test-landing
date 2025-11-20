@@ -27,7 +27,7 @@
   transform: scale(1.03);
 }
 
-/* Efecto en extremos: se neutraliza en 1–2 tarjetas por breakpoints */
+/* Efecto en extremos: se neutraliza en 1–2 tarjetas por lógica */
 .edge-card {
   transform: scale(0.92);
   filter: blur(1px);
@@ -36,12 +36,12 @@
 
 /* Controles debajo del carrusel, centrados */
 .carousel-controls {
-  position: static;          /* en flujo normal */
+  position: static;
   display: flex;
-  justify-content: center;   /* centradas debajo */
+  justify-content: center;
   align-items: center;
   gap: 24px;
-  margin-top: 24px;          /* separación del carrusel */
+  margin-top: 24px;
   transform: none;
   padding: 0;
   pointer-events: auto;
@@ -97,12 +97,12 @@
 /* 769px – 1200px → 2 tarjetas centradas con gap visible */
 @media (max-width: 1200px) and (min-width: 769px) {
   .carousel-track { justify-content: center; gap: 24px; }
-  /* cada item ocupa la mitad restando el gap */
+
   .carousel-item.two {
     flex: 0 0 calc((100% - 24px) / 2);
     max-width: calc((100% - 24px) / 2);
   }
-  /* neutraliza edge en 2 tarjetas */
+
   .edge-card { transform: none; filter: none; opacity: 1; }
 }
 
@@ -126,30 +126,36 @@
   }
 
   .carousel-controls {
-    margin-top: 16px;  /* flechas abajo, con menos separación */
+    margin-top: 16px;
     gap: 16px;
   }
+
   .carousel-btn {
     width: 40px;
     height: 40px;
     font-size: 1.4rem;
   }
 
-  /* neutraliza edge en 1 tarjeta */
   .edge-card { transform: none; filter: none; opacity: 1; }
 }
 
 /* ——— Estados específicos ——— */
 
-/* 1 tarjeta: track de ancho intrínseco, centrado perfecto */
-.carousel-wrapper.single { text-align: center; }
-.carousel-track.single {
-  display: inline-flex;  /* el ancho se ajusta al contenido */
-  margin: 0 auto;
-  gap: 24px;
-}
-.carousel-item.single {
-  flex: 0 0 auto;        /* ancho intrínseco de la card */
+/* 1 tarjeta: track centrado, item ocupa todo el ancho */
+.carousel-wrapper.single {
+  text-align: center;
 }
 
-/* Nota: los controles no requieren estados especiales cuando van abajo */
+.carousel-track.single {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 24px;
+}
+
+.carousel-item.single {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
