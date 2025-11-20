@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Specialty Carousel Module 
 
-## Getting Started
+Este módulo implementa un carrusel responsivo de artículos destacados, ideal para secciones de noticias, blogs o contenido editorial. Se adapta automáticamente al tamaño de pantalla, mostrando entre 1 y 5 tarjetas con efectos visuales en los extremos y navegación fluida.
 
-First, run the development server:
+---
+
+## Instalación y ejecución local
+
+Sigue estos pasos para clonar el repositorio, instalar las dependencias y ejecutar el proyecto en modo desarrollo:
 
 ```bash
+# 1. Clona el repositorio
+git clone https://github.com/RicardoNatera/test-landing.git
+cd test-landing
+
+# 2. Instala las dependencias
+npm install
+
+# 3. Ejecuta el servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# 4. Luego abre "http://localhost:3000" en tu navegador para ver el carrusel en acción.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuración de API Key para [News Api](https://newsapi.org/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Este proyecto requiere una API key para funcionar correctamente.  
+Debes crear un archivo `.env.local` en la raíz del proyecto y definir la variable:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+NEWSAPI_KEY=tu_api_key_aqui
 
-## Learn More
+Puedes usar el archivo `.env.example` como referencia.
 
-To learn more about Next.js, take a look at the following resources:
+La api key se obtiene al ingresar en [News Api](https://newsapi.org/) y generar una api key con su usario registrado.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Estructura del módulo
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Carousel.tsx → Componente principal del carrusel
+    
+- Card.tsx → Tarjeta individual con imagen, título y descripción
+    
+- Carousel.css → Estilos responsivos del carrusel
+    
+- Card.css → Estilos adaptativos de cada tarjeta
+    
 
-## Deploy on Vercel
+## Tecnologías utilizadas
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js 16 (App Router)](https://nextjs.org/)
+- [React](https://react.dev/)
+- Estilos con CSS Modules
