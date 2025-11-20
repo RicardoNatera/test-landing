@@ -49,3 +49,7 @@ La api key se obtiene al ingresar en [News Api](https://newsapi.org/) y generar 
 - [Next.js 16 (App Router)](https://nextjs.org/)
 - [React](https://react.dev/)
 - Estilos con CSS Modules
+
+## Versión en producción
+
+> 📎 [Click Here](https://test-specialty.vercel.app/)
