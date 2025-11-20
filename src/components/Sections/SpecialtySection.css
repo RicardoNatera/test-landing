@@ -1,6 +1,8 @@
 .specialty-section {
   padding: 64px 24px;
   text-align: center;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .specialty-header {
@@ -26,4 +28,50 @@
   display: block;
   font-weight: 700;
   color: #000;
+}
+
+/* Pantallas grandes: 1201px – 1536px */
+@media (max-width: 1536px) {
+  .specialty-title {
+    font-size: 2.3rem;
+  }
+}
+
+/* Pantallas medianas: 1025px – 1200px */
+@media (max-width: 1200px) {
+  .specialty-title {
+    font-size: 2.1rem;
+  }
+}
+
+/* Tablets: 769px – 1024px */
+@media (max-width: 1024px) {
+  .specialty-section {
+    padding: 48px 16px;
+  }
+
+  .specialty-title {
+    font-size: 1.9rem;
+    margin-bottom: 32px;
+  }
+}
+
+/* Móviles: 481px – 768px */
+@media (max-width: 768px) {
+  .specialty-section {
+    padding: 40px 12px;
+  }
+
+  .specialty-title {
+    font-size: 1.7rem;
+    line-height: 0.8;
+  }
+}
+
+/* Móviles pequeños: 320px – 480px */
+@media (max-width: 480px) {
+  .specialty-title {
+    font-size: 1.5rem;
+    line-height: 0.9;
+  }
 }

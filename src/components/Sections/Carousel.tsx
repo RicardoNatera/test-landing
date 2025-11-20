@@ -15,12 +15,28 @@ type Article = {
 export default function Carousel() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [startIndex, setStartIndex] = useState(0);
-  const visibleCount = 5;
+  const [visibleCount, setVisibleCount] = useState(5);
 
   useEffect(() => {
     fetch("/api/news")
       .then((res) => res.json())
       .then((data) => setArticles(data));
+  }, []);
+
+  // Ajustar visibleCount según ancho de pantalla
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      const width = window.innerWidth;
+      if (width >= 1920) setVisibleCount(5);
+      else if (width >= 1536) setVisibleCount(4);
+      else if (width >= 1201) setVisibleCount(3);
+      else if (width >= 769) setVisibleCount(2);
+      else setVisibleCount(1);
+    };
+
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
   }, []);
 
   const next = () => {

@@ -1,7 +1,7 @@
+/* Base: Desktop 1920 × 1080 */
 .card-wrapper {
-  width: 100%;
-  max-width: 320px;
-  min-height: 420px;
+  width: 380px;
+  height: 500px;
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 24px;
@@ -28,7 +28,7 @@
 }
 
 .card-heading {
-  font-size: 1.4rem;
+  font-size: 1.4rem; /* tamaño desktop */
   font-weight: 600;
   margin-bottom: 12px;
   color: #222;
@@ -50,4 +50,75 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Cards de los extremos (más pequeñas en desktop) */
+.edge-card .card-wrapper {
+  width: 386px;
+  height: 486px;
+  transform: scale(0.95);
+  filter: blur(1px);
+  opacity: 0.85;
+}
+
+/* Tablet: hasta 1024px */
+@media (max-width: 1024px) {
+  .card-wrapper {
+    width: 320px;
+    height: 420px;
+    padding: 20px;
+  }
+
+  .edge-card .card-wrapper {
+    width: 290px;
+    height: 380px;
+    transform: scale(0.94);
+  }
+
+  .card-photo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 16px;
+  }
+
+  .card-heading {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}
+
+/* Mobile: hasta 768px */
+@media (max-width: 768px) {
+  .card-wrapper {
+    width: 90%; /* ocupa casi todo el ancho */
+    height: auto;
+    padding: 16px;
+  }
+
+  .edge-card .card-wrapper {
+    width: 85%;
+    height: auto;
+    transform: scale(0.92);
+  }
+
+  .card-photo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 12px;
+  }
+
+  .card-heading {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
 }

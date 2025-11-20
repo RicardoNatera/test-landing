@@ -1,6 +1,7 @@
+/* Carousel.css */
 .carousel-wrapper {
   width: 100%;
-  max-width: 1440px;
+  max-width: 100%;
   margin: 0 auto;
   overflow: hidden;
   padding: 32px 0;
@@ -9,15 +10,15 @@
 
 .carousel-track {
   display: flex;
+  align-items: stretch;
   gap: 24px;
-  justify-content: flex-start;
-  padding: 0 48px;
+  justify-content: center;
+  padding: 0;
   transition: transform 0.3s ease;
 }
 
 .carousel-item {
-  flex: 0 0 18%;
-  max-width: 18%;
+  flex: 0 0 auto;
   transform: scale(1);
   transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
 }
@@ -26,17 +27,25 @@
   transform: scale(1.03);
 }
 
+/* Efecto en extremos: se neutraliza en 1–2 tarjetas por breakpoints */
 .edge-card {
   transform: scale(0.92);
   filter: blur(1px);
   opacity: 0.8;
 }
 
+/* Controles debajo del carrusel, centrados */
 .carousel-controls {
+  position: static;          /* en flujo normal */
   display: flex;
-  justify-content: center;
-  margin-top: 24px;
+  justify-content: center;   /* centradas debajo */
+  align-items: center;
   gap: 24px;
+  margin-top: 24px;          /* separación del carrusel */
+  transform: none;
+  padding: 0;
+  pointer-events: auto;
+  z-index: 1;
 }
 
 .carousel-btn {
@@ -68,19 +77,79 @@
   box-shadow: none;
 }
 
+/* ——— Breakpoints ——— */
+
+/* ≥1920px → 5 tarjetas */
+@media (min-width: 1920px) {
+  .carousel-item { flex: 0 0 18%; max-width: 18%; }
+}
+
+/* 1536px – 1919px → 4 tarjetas */
+@media (max-width: 1919px) and (min-width: 1536px) {
+  .carousel-item { flex: 0 0 23%; max-width: 23%; }
+}
+
+/* 1201px – 1535px → 3 tarjetas */
+@media (max-width: 1535px) and (min-width: 1201px) {
+  .carousel-item { flex: 0 0 30%; max-width: 30%; }
+}
+
+/* 769px – 1200px → 2 tarjetas centradas con gap visible */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .carousel-track { justify-content: center; gap: 24px; }
+  /* cada item ocupa la mitad restando el gap */
+  .carousel-item.two {
+    flex: 0 0 calc((100% - 24px) / 2);
+    max-width: calc((100% - 24px) / 2);
+  }
+  /* neutraliza edge en 2 tarjetas */
+  .edge-card { transform: none; filter: none; opacity: 1; }
+}
+
+/* ≤768px → 1 tarjeta con scroll */
 @media (max-width: 768px) {
+  .carousel-wrapper { padding: 24px 0; }
+
   .carousel-track {
     flex-wrap: nowrap;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    justify-content: flex-start;
+    gap: 16px;
+    width: 100%;
   }
 
   .carousel-item {
-    flex: 0 0 80%;
+    flex: 0 0 86%;
+    max-width: 86%;
     scroll-snap-align: center;
   }
 
   .carousel-controls {
-    margin-top: 16px;
+    margin-top: 16px;  /* flechas abajo, con menos separación */
+    gap: 16px;
   }
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+
+  /* neutraliza edge en 1 tarjeta */
+  .edge-card { transform: none; filter: none; opacity: 1; }
 }
+
+/* ——— Estados específicos ——— */
+
+/* 1 tarjeta: track de ancho intrínseco, centrado perfecto */
+.carousel-wrapper.single { text-align: center; }
+.carousel-track.single {
+  display: inline-flex;  /* el ancho se ajusta al contenido */
+  margin: 0 auto;
+  gap: 24px;
+}
+.carousel-item.single {
+  flex: 0 0 auto;        /* ancho intrínseco de la card */
+}
+
+/* Nota: los controles no requieren estados especiales cuando van abajo */
