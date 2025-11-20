@@ -1,0 +1,17 @@
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.carousel-btn {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .carousel-container {
+    flex-direction: column;
+  }
+}
