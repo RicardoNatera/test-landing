@@ -23,7 +23,6 @@ export default function Carousel() {
       .then((data) => setArticles(data));
   }, []);
 
-  // Ajustar visibleCount según ancho de pantalla
   useEffect(() => {
     const updateVisibleCount = () => {
       const width = window.innerWidth;
@@ -61,7 +60,8 @@ export default function Carousel() {
     <div className="carousel-wrapper">
       <div className="carousel-track">
         {visibleArticles.map((article, idx) => {
-          const isEdge = idx === 0 || idx === visibleArticles.length - 1;
+          const isEdge = visibleArticles.length > 2 && (idx === 0 || idx === visibleArticles.length - 1);
+
           return (
             <div
               className={`carousel-item ${isEdge ? "edge-card" : ""}`}
