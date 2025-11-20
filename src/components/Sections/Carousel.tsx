@@ -14,7 +14,8 @@ type Article = {
 
 export default function Carousel() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const [index, setIndex] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
+  const visibleCount = 5;
 
   useEffect(() => {
     fetch("/api/news")
@@ -22,16 +23,45 @@ export default function Carousel() {
       .then((data) => setArticles(data));
   }, []);
 
-  const next = () => setIndex((i) => (i + 1) % articles.length);
-  const prev = () => setIndex((i) => (i - 1 + articles.length) % articles.length);
+  const next = () => {
+    setStartIndex((prev) =>
+      prev + 1 <= articles.length - visibleCount ? prev + 1 : prev
+    );
+  };
+
+  const prev = () => {
+    setStartIndex((prev) => (prev > 0 ? prev - 1 : 0));
+  };
+
+  const visibleArticles = articles.slice(startIndex, startIndex + visibleCount);
 
   if (articles.length === 0) return <p>Loading...</p>;
 
   return (
-    <div className="carousel-container">
-      <button className="carousel-btn" onClick={prev}>‹</button>
-      <Card {...articles[index]} />
-      <button className="carousel-btn" onClick={next}>›</button>
+    <div className="carousel-wrapper">
+      <div className="carousel-track">
+        {visibleArticles.map((article, idx) => (
+          <div className="carousel-item" key={idx}>
+            <Card
+              title={article.title}
+              description={article.description}
+              image={article.image}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="carousel-controls">
+        <button className="carousel-btn" onClick={prev} disabled={startIndex === 0}>
+          ‹
+        </button>
+        <button
+          className="carousel-btn"
+          onClick={next}
+          disabled={startIndex + visibleCount >= articles.length}
+        >
+          ›
+        </button>
+      </div>
     </div>
   );
 }

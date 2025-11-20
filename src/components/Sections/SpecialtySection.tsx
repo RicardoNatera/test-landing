@@ -8,10 +8,11 @@ export default function SpecialtySection() {
   return (
     <section className="specialty-section">
       <div className="specialty-header">
-        <h2 className="specialty-title">What is the Specialty of us</h2>
-        <p className="specialty-subtitle">
-          Noticias dinámicas obtenidas desde NewsAPI.
-        </p>
+        <h2 className="specialty-title">
+          <span className="line-top">What is the</span><br />
+          <span className="line-bottom">Specialty Of Us?</span>
+        </h2>
+
       </div>
 
       <Carousel />

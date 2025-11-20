@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const res = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&pageSize=6`,
+    `https://newsapi.org/v2/top-headlines?country=us`,
     {
       headers: {
         "X-Api-Key": process.env.NEWSAPI_KEY!,
